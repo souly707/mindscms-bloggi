@@ -87,6 +87,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/index',                        ['as' => 'admin.index',                  'uses' => 'Backend\AdminController@index']);
 
     Route::get('/posts/delete/image/{id}',      ['as' => 'admin.posts.media.destroy',    'uses' => 'Backend\PostController@destroy_image']);
+    Route::get('/pages/delete/image/{id}',      ['as' => 'admin.pages.media.destroy',    'uses' => 'Backend\PagesController@destroy_image']);
+    Route::get('/users/delete/image/{id}',          ['as' => 'admin.users.media.destroy',    'uses' => 'Backend\UsersController@destroy_image']);
 
     // resource Routes
     Route::resource('posts',              'Backend\PostController',                 ['as' => 'admin']);

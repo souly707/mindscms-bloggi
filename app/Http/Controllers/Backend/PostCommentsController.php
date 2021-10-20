@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Category;
+// use App\Models\Category;
 use App\Models\Comment;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
-use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Validator;
 
