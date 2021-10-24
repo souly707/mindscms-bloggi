@@ -22,7 +22,7 @@
 
         <!-- Custom styles for this template-->
         <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
+        @yield('style')
     </head>
 
     <body class="bg-gradient-primary">
@@ -42,7 +42,7 @@
 
         <!-- Custom scripts for all pages-->
         <script src="{{ asset('backend/js/sb-admin-2.min.js') }}"></script>
-
+        @yield('script')
     </body>
 
 </html>

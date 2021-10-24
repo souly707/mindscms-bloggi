@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -86,8 +86,8 @@ class UsersController extends Controller
 
         $validated = Validator::make($request->all(), [
             'name'          => 'required',
-            'username'      => 'required|mix:20|unique:users',
-            'email'         => 'required|email|Max:255|unique:users',
+            'username'      => 'required|max:20|unique:users',
+            'email'         => 'required|email|max:255|unique:users',
             'mobile'        => 'required|numeric|unique:users',
             'status'        => 'required',
             'password'      => 'required|min:8',
@@ -201,7 +201,7 @@ class UsersController extends Controller
         // Valdate the request
         $valdator = Validator::make($request->all(), [
             'name'          => 'required',
-            'username'      => 'required|mix:20|unique:users,username,' . $id,
+            'username'      => 'required|max:20|unique:users,username,' . $id,
             'email'         => 'required|email|Max:255|unique:users,email,' . $id,
             'mobile'        => 'required|numeric|unique:users,mobile,' . $id,
             'status'        => 'required',
@@ -224,7 +224,6 @@ class UsersController extends Controller
                 $data['password']  = bcrypt($request->password);
             }
 
-            $data['bio']                = $request->bio;
             $data['bio']                = $request->bio;
             $data['receive_email']      = $request->receive_email;
             $data['status']             = $request->status;
@@ -309,7 +308,7 @@ class UsersController extends Controller
                 unlink('assets/posts/' . $user->user_image);
             }
 
-            $user->usser_image = null;
+            $user->user_image = null;
             $user->save();
 
             return redirect()->back()->with([

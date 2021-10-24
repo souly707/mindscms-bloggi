@@ -86,9 +86,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/',                             ['as' => 'admin.index_route',            'uses' => 'Backend\AdminController@index']);
     Route::get('/index',                        ['as' => 'admin.index',                  'uses' => 'Backend\AdminController@index']);
 
-    Route::get('/posts/delete/image/{id}',      ['as' => 'admin.posts.media.destroy',    'uses' => 'Backend\PostController@destroy_image']);
-    Route::get('/pages/delete/image/{id}',      ['as' => 'admin.pages.media.destroy',    'uses' => 'Backend\PagesController@destroy_image']);
-    Route::get('/users/delete/image/{id}',          ['as' => 'admin.users.media.destroy',    'uses' => 'Backend\UsersController@destroy_image']);
+    // Delete Users Images Routes
+    Route::get('/posts/delete/image/{id}',        ['as' => 'admin.posts.media.destroy',           'uses' => 'Backend\PostController@destroy_image']);
+    Route::get('/pages/delete/image/{id}',        ['as' => 'admin.pages.media.destroy',           'uses' => 'Backend\PagesController@destroy_image']);
+    Route::get('/users/delete/image/{id}',        ['as' => 'admin.users.media.destroy',           'uses' => 'Backend\UsersController@destroy_image']);
+    Route::get('/supervisors/delete/image/{id}',  ['as' => 'admin.supervisors.media.destroy',     'uses' => 'Backend\SupervisorController@destroy_image']);
 
     // resource Routes
     Route::resource('posts',              'Backend\PostController',                 ['as' => 'admin']);
@@ -97,7 +99,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('post_categories',    'Backend\PostCategoriesController',       ['as' => 'admin']);
     Route::resource('users',              'Backend\UsersController',                ['as' => 'admin']);
     Route::resource('contact_us',         'Backend\ContactUsController',            ['as' => 'admin']);
-    Route::resource('supervisor',         'Backend\SupervisorController',           ['as' => 'admin']);
+    Route::resource('supervisors',        'Backend\SupervisorController',           ['as' => 'admin']);
     Route::resource('settings',           'Backend\SettingsController',             ['as' => 'admin']);
   });
 });

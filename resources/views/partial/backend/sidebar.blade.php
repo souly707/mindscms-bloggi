@@ -55,7 +55,7 @@ $current_page = Route::currentRouteName();
 
                 @foreach ($menu->appeardChildren as $sub_menu)
 
-                <a class="collapse-item {{ (int)(getParentOf($current_page) + 1) == $sub_menu->id ? 'active' : '' }}"
+                <a class="collapse-item {{ getParentOf($current_page) != null && (int)(getParentOf($current_page) + 1) == $sub_menu->id ? 'active' : '' }}"
                     href="{{ route('admin.' . $sub_menu->as) }}">{{ $sub_menu->display_name }}</a>
 
                 @endforeach
@@ -79,7 +79,7 @@ $current_page = Route::currentRouteName();
 
     @permission($menu->name)
 
-    @if (count($menu->appeardChildren == 0))
+    @if (count($menu->appeardChildren) == 0)
 
     <li class="nav-item {{ $menu->id == getParentShowOf($current_page) ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.' . $menu->as) }}">
@@ -105,7 +105,7 @@ $current_page = Route::currentRouteName();
             <span>{{ $menu->display_name }}</span>
         </a>
 
-        @if (isset($menu->appeardChildren) && count($menu->appeardChildren > 0))
+        @if (isset($menu->appeardChildren) && count($menu->appeardChildren) > 0)
 
         <div id="collapse_{{ $menu->route }}"
             class="collapse {{ in_array($menu->parent_show, [getParentShowOf($current_page), getParentOf($current_page)]) ? 'active' : '' }}"
@@ -114,10 +114,10 @@ $current_page = Route::currentRouteName();
             <div class="bg-white py-2 collapse-inner rounded">
 
                 @foreach ($menu->appeardChildren as $sub_menu)
-
-                <a class="collapse-item {{ (int)(getParentOf($current_page) + 1) == $sub_menu->id ? 'active' : '' }}"
+                @permission($sub_menu->name)
+                <a class="collapse-item {{ getParentOf($current_page) != null && (int)(getParentOf($current_page) + 1) == $sub_menu->id ? 'active' : '' }}"
                     href="{{ route('admin.' . $sub_menu->as) }}">{{ $sub_menu->display_name }}</a>
-
+                @endpermission
                 @endforeach
             </div>
         </div>
